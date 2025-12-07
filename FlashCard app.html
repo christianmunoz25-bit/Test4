@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Flashcard Study App</title>
+    <link rel="stylesheet" href="Flashcard.css"> </head>
+<body>
+
+    <h1>Flip Flashcard Study App</h1>
+    <p>
+        <span id="card-count">0 cards 0 unmastered</span>
+    </p>
+
+    <div id="filter-buttons">
+        <button class="btn-secondary active" data-filter="all">All</button>
+        <button class="btn-secondary" data-filter="mastered">Mastered</button>
+        <button class="btn-secondary" data-filter="unmastered">Unmastered</button>
+    </div>
+
+    <div id="study-area">
+        <div class="flashcard-container" id="current-card-container">
+            <div class="flashcard">
+                <div class="flashcard-face flashcard-front">
+                    Click "+ New Card" to add a question.
+                </div>
+                <div class="flashcard-face flashcard-back">
+                    Answer will show here after flip.
+                </div>
+            </div>
+        </div>
+
+        <div id="action-buttons">
+            <button class="btn-primary" id="flip-btn">Flip</button>
+            <button class="btn-secondary" id="next-btn">Next</button>
+            <button class="btn-success" id="master-btn">Mark mastered</button>
+        </div>
+        <p id="no-cards-message">No cards yet. Create one to begin.</p>
+    </div>
+
+    ---
+
+    <h2>Create New Flashcard</h2>
+    <div id="create-flashcard-form">
+        <label>Question (front)</label>
+        <label>Answer (back)</label>
+        <textarea id="question-input" rows="4" placeholder="Enter your question here..."></textarea>
+        <textarea id="answer-input" rows="4" placeholder="Enter the answer here..."></textarea>
+
+        <div>
+            <button class="btn-secondary" id="cancel-btn">Cancel</button>
+            <button class="btn-primary" id="save-card-btn">Save card</button>
+        </div>
+    </div>
+
+    <script src="Flashcard.js"></script> </body>
+</html>
