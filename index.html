@@ -4,25 +4,60 @@
     <link rel="stylesheet" href="bag-o.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcard Study App</title>
+    <title>📚Flashcard Study App</title>
 </head>
 <body>
     <div class="flashcard-container">
-        <h1>Flashcard Quiz</h1>
+        <h1>FLASHCARD QUIZ</h1>
+        
+        <div class="filter-controls">
+            <label for="filter">SHOW:</label>
+            <select id="filter">
+                <option value="all">ALL CARDS</option>
+                <option value="unmastered">🤷UNMASTERED</option>
+                <option value="mastered">⚔️MASTERED</option>
+            </select>
+        </div>
+        
+        <button id="show-create-form">Create New Card</button>
+        
         <div id="flashcard" class="flashcard">
             <div class="front">
-            <p id="question">Question will appear here</p>
+                <p id="question">Question will appear here</p>
+            </div>
+            <div class="back">
+                <img id="card-image" src="" alt="Card Image" class="card-image">
+                <p id="answer">Answer will appear here</p>
+            </div>
         </div>
-        <div class="back">
-             <img id="card-image" src="" alt="Flashcard Image" class="card-image">
-            <p id="answer">Answer will appear here</p>
+        
+        <div class="main-controls-wrapper">
+            <div class="guess-controls">
+                <input type="text" id="user-guess" placeholder="Type your answer here" required>
+                <button id="check-guess">Check Answer</button>
+            </div>
+            <div class="button-row">
+                <button id="next-card">Next</button>
+            </div>
         </div>
+
+        <div id="mastery-controls" class="button-row hidden"> 
+            <button id="flip-card">Flip Card</button>
+            <button id="mark-mastered">Mark as Mastered</button> 
+        </div>
+        
+        <form id="create-card-form" class="hidden">
+            <h3>Create New Flashcard</h3>
+            <input type="text" id="new-question" placeholder="Enter Question" required>
+            <input type="text" id="new-answer" placeholder="Enter Answer" required>
+            <input type="url" id="new-image" placeholder="Image URL (Optional)">
+            <div class="button-row">
+                <button type="submit">Save Card</button>
+                <button type="button" id="hide-create-form-btn">Cancel</button>
+            </div>
+        </form>
     </div>
-    <div class="button-row"> 
-    <button id="flip-card">Flip Card</button>
-    <button id="next-card">Next</button>
-    </div>
-    </div>
+
     <script src="bag-o.js"></script>
 </body>
 </html>
