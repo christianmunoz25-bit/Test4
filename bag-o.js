@@ -3,7 +3,7 @@ let flashcards = [
         question: "How many bones does a human body have?",
         answer: "206",
         image: "bone.jpg",
-        mastered: false
+        mastered: true
     },
     {
         question: "What is the largest organ in human body?",
@@ -14,7 +14,7 @@ let flashcards = [
     {
         question: "What is the nearest star in our Solar System?",
         answer: "Sun",
-        image: "",
+        image: "sun.jpg",
         mastered: true
     }
 ]; 
@@ -29,7 +29,6 @@ const cardImage = document.getElementById('card-image');
 const userGuess = document.getElementById('user-guess');
 const checkGuessBtn = document.getElementById('check-guess');
 const nextCardBtn = document.getElementById('next-card');
-const flipCardBtn = document.getElementById('flip-card');
 const markMasteredBtn = document.getElementById('mark-mastered');
 const filterSelect = document.getElementById('filter');
 const showCreateFormBtn = document.getElementById('show-create-form');
@@ -38,17 +37,22 @@ const newQuestionInput = document.getElementById('new-question');
 const newAnswerInput = document.getElementById('new-answer');
 const newImageInput = document.getElementById('new-image');
 const hideCreateFormBtn = document.getElementById('hide-create-form-btn');
-const masteryControls = document.getElementById('mastery-controls');
+
+const mainControlsWrapper = document.querySelector('.main-controls-wrapper'); 
+
 
 function displayCard() {
     if (filteredCards.length === 0) {
         questionEl.textContent = "No cards match the filter!";
         answerEl.textContent = "";
-        cardImage.src = "";
+        cardImage.src = "bone.jpg";
         cardImage.style.display = "none";
-        masteryControls.classList.add('hidden');
+        
+        mainControlsWrapper.classList.add('hidden'); 
         return;
     }
+
+    mainControlsWrapper.classList.remove('hidden');
 
     const card = filteredCards[currentCard];
     questionEl.textContent = card.question;
@@ -57,7 +61,7 @@ function displayCard() {
     if (card.image) {
         cardImage.src = card.image;
         cardImage.style.display = "block";
-        cardImage.alt = "Card Image";
+        cardImage.alt = "";
     } else {
         cardImage.src = "";
         cardImage.style.display = "none";
@@ -65,8 +69,7 @@ function displayCard() {
 
     flashcard.classList.remove('is-flipped');
     userGuess.value = "";
-    masteryControls.classList.remove('hidden');
-
+    
     markMasteredBtn.textContent = card.mastered ? 'Unmark as Mastered' : 'Mark as Mastered';
 }
 
@@ -85,33 +88,27 @@ function applyFilter() {
     displayCard();
 }
 
-// AUTO‑MASTER / UNMASTER ON GUESS
 checkGuessBtn.addEventListener('click', () => {
-    if (!filteredCards.length) return;
-
+    if (filteredCards.length === 0) return;
     const guess = userGuess.value.trim().toLowerCase();
     const card = filteredCards[currentCard];
     const correctAnswer = card.answer.toLowerCase();
-
     const originalIndex = flashcards.findIndex(c => c === card);
-
+    
     if (guess === correctAnswer) {
-        alert('Correct!');
-        flashcard.classList.add('is-flipped');
-        flashcards[originalIndex].mastered = true;          // auto mark mastered
+        alert('Correct! Mark as Mastered');
+        flashcards[originalIndex].mastered = true;
         markMasteredBtn.textContent = 'Unmark as Mastered';
     } else {
-        alert('Incorrect! Try again.');
-        flashcards[originalIndex].mastered = false;         // auto mark unmastered
+        alert('Incorrect! Mark as Unmastered');
+        flashcards[originalIndex].mastered = false;
         markMasteredBtn.textContent = 'Mark as Mastered';
     }
-
-    applyFilter();  // keep Mastered/Unmastered filters accurate
+   
+    flashcard.classList.add('is-flipped');
 });
 
-flipCardBtn.addEventListener('click', () => {
-    flashcard.classList.toggle('is-flipped');
-});
+
 
 markMasteredBtn.addEventListener('click', () => {
     if (!filteredCards.length) return;
@@ -119,6 +116,7 @@ markMasteredBtn.addEventListener('click', () => {
     const originalIndex = flashcards.findIndex(card => card === filteredCards[currentCard]);
     flashcards[originalIndex].mastered = !flashcards[originalIndex].mastered;
     alert(flashcards[originalIndex].mastered ? 'Marked as Mastered!' : 'Unmarked as Mastered!');
+    
     applyFilter();
 });
 
