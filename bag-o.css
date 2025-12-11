@@ -4,16 +4,15 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #f5a623, #f29d77);
+    background: linear-gradient(135deg,#7a6550, #7a5750);
     margin: 0;
     overflow: auto;
     color: white;
     font-weight: bold;
 }
 
-/* FLASHCARD CONTAINER */
 .flashcard-container {
-    background-color: #FFDF00;
+    background-color:limegreen;
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     width: 90%;
@@ -32,9 +31,11 @@ body {
     margin: 8px 0 16px;
     letter-spacing: 3px;
     font-size: 1.6rem;
+    color: black;
+    font-family: monospace;
 }
 
-/* FILTER CONTROLS */
+
 .filter-controls {
     display: flex;
     justify-content: space-between;
@@ -43,6 +44,7 @@ body {
     gap: 12px;
     margin-bottom: 24px;
     font-size: 1em;
+    font-weight: bold;
 }
 
 .filter-controls label {
@@ -68,9 +70,14 @@ label {
     width: 100%;
     height: 300px;
     position: relative;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: transform 0.3s;
+    
+    /* CRITICAL 3D PROPERTIES (FORCED) */
+    -webkit-transform-style: preserve-3d !important;
+    transform-style: preserve-3d !important;
+    -webkit-perspective: 1000px !important;
+    perspective: 1000px !important;
+    
+    transition: transform 0.6s; 
     margin: 16px 0 20px;
 }
 
@@ -78,7 +85,11 @@ label {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
+    
+    /* CRITICAL HIDING OF BACKFACE (FORCED) */
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important; 
+    
     border-radius: 10px;
     padding: 20px;
     box-sizing: border-box;
@@ -100,16 +111,21 @@ label {
 
 .back {
     background-color: #f0f0f0;
-    transform: rotateY(180deg);
+    
+    /* CRITICAL: Ensure back is rotated initially */
+    transform: rotateY(180deg); 
+    
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     font-size: 1.2em;
 }
 
-/* FLIPPED */
+/* FLIPPED STATE */
 .flashcard.is-flipped {
-    transform: rotateY(180deg);
+    /* CRITICAL: Rotate the entire container (FORCED) */
+    -webkit-transform: rotateY(180deg) !important;
+    transform: rotateY(180deg) !important; 
 }
 
 /* IMAGE */
@@ -173,27 +189,25 @@ label {
 /* BUTTONS */
 .button-row {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-evenly;
+    gap: 15px;
     width: 100%;
-}
-
-#mastery-controls {
     margin-top: 0;
 }
 
 button {
     flex-grow: 1;
-    margin: 0 5px;
-    padding: 10px 20px;
+    margin: 0;
+    padding: 10px 10px;
     border: none;
     border-radius: 25px;
     background-color: #ff5722;
     color: white;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    max-width: 45%; 
 }
 
 #next-card {
@@ -207,7 +221,7 @@ button:hover {
 
 /* HIDDEN CLASS FOR JS */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* CREATE CARD FORM */
