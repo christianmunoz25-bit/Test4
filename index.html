@@ -7,6 +7,7 @@
     <title>📚Flashcard Study App</title>
 </head>
 <body>
+
     <div class="flashcard-container">
         <h1>FLASHCARD QUIZ</h1>
         
@@ -19,6 +20,7 @@
             </select>
         </div>
         
+        
         <button id="show-create-form">Create New Card</button>
         
         <div id="flashcard" class="flashcard">
@@ -26,7 +28,7 @@
                 <p id="question">Question will appear here</p>
             </div>
             <div class="back">
-                <img id="card-image" src="" alt="Card Image" class="card-image">
+                <img id="card-image" src="bone.jpg" alt="Card Image" class="card-image">
                 <p id="answer">Answer will appear here</p>
             </div>
         </div>
@@ -36,14 +38,10 @@
                 <input type="text" id="user-guess" placeholder="Type your answer here" required>
                 <button id="check-guess">Check Answer</button>
             </div>
-            <div class="button-row">
+            <div class="button-row full-controls"> 
                 <button id="next-card">Next</button>
+                <button id="mark-mastered">Mark as Mastered</button> 
             </div>
-        </div>
-
-        <div id="mastery-controls" class="button-row hidden"> 
-            <button id="flip-card">Flip Card</button>
-            <button id="mark-mastered">Mark as Mastered</button> 
         </div>
         
         <form id="create-card-form" class="hidden">
